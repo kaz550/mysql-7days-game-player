@@ -1,0 +1,8 @@
+# Day 7 バックアップと復元（OSのターミナルで実行）
+# 本書掲載のコマンド。MySQL 8.4 LTSで未実機検証。
+# PowerShell等ではリダイレクトの挙動が異なる場合があります。
+
+mysqldump -u root -p --single-transaction --default-character-set=utf8mb4 game_player_db > game_player_db.sql
+mysql -u root -p -e "CREATE DATABASE game_player_restore CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;"
+mysql -u root -p game_player_restore < game_player_db.sql
+mysql -u root -p -e "SHOW TABLES FROM game_player_restore;"
